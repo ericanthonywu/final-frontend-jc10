@@ -7,6 +7,8 @@ import axios from 'axios'
 import {numberWithCommas} from "../../3.helpers/function";
 import {toast} from "react-toastify";
 import moment from "moment";
+import {Link} from "react-router-dom";
+import {setCart} from "../../redux/1.actions";
 
 class Cart extends Component {
     state = {
@@ -15,29 +17,38 @@ class Cart extends Component {
         inputPenerima: '',
         inputAlamat: '',
         inputKodePos: '',
-        inputUang: 0
+        inputUang: 0,
+        empty: false
     };
 
     componentWillReceiveProps(newProps) {
         axios.get(urlApi + `cart?userId=${this.props.id}`).then(res => {
             if (res.data.length) {
                 this.getDataCart(newProps.id)
-            } else {
-                toast.info("Cart Empty");
-                this.props.history.push('/')
+            }else{
+                this.setState({
+                    empty: true
+                })
             }
         })
     }
 
     componentDidMount() {
-        axios.get(urlApi + `cart?userId=${this.props.id}`).then(res => {
-            if (res.data.length) {
-                this.getDataCart(this.props.id)
-            } else {
-                toast.info("Cart Empty");
-                this.props.history.push('/')
-            }
-        })
+        if(this.props.id) {
+            axios.get(urlApi + `cart?userId=${this.props.id}`).then(res => {
+                if (res.data.length) {
+                    this.getDataCart(this.props.id)
+                } else {
+                    this.setState({
+                        empty: true
+                    })
+                }
+            })
+        }else{
+            toast.warn('You Need to Logged In');
+            this.props.history.push('/')
+        }
+
     }
 
     deleteCartItem = (id) => {
@@ -45,6 +56,20 @@ class Cart extends Component {
             .then((res) => {
                 swal('Success', 'Item Deleted', 'success');
                 this.getDataCart(this.props.id)
+                axios.get(`${urlApi}cart?userId=${this.props.id}`).then(res => {
+                    this.props.setCart({
+                        totalCart: res.data.length
+                    })
+                })
+                axios.get(urlApi + `cart?userId=${this.props.id}`).then(res => {
+                    if (res.data.length) {
+                        this.getDataCart(this.props.id)
+                    } else {
+                        this.setState({
+                            empty: true
+                        })
+                    }
+                })
             })
             .catch((err) => {
                 swal('Error', 'There is an error', 'error')
@@ -114,7 +139,7 @@ class Cart extends Component {
             result += val.quantity * (val.price - (val.price * (val.discount / 100)))
         });
 
-        return numberWithCommas(result)
+        return result
     };
 
     onBtnPay = async () => {
@@ -135,7 +160,7 @@ class Cart extends Component {
                         userId: this.props.id,
                         items: prodData.data,
                         time: moment().format("YYYY-MM-DD"),
-                        totalPrice: "Rp. " + this.renderTotalCart(),
+                        totalPrice: this.renderTotalCart(),
                         recipient: this.props.username,
                         postalCode: this.state.inputKodePos,
                         address: this.state.inputAlamat,
@@ -164,76 +189,85 @@ class Cart extends Component {
     render() {
         return (
             <div className="container">
-                <table className="table mt-3 text-center">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total Price</th>
-                        <th>Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.renderCart()}
-                    </tbody>
-                </table>
-                <div className="row">
-                    <div className="col-8">
-                        <input type="button" onClick={() => {
-                            axios.get(urlApi + `cart?userId=${this.props.id}`).then(res => {
-                                if (res.data.length) {
-                                    this.setState({isCheckout: !this.state.isCheckout})
-                                } else {
-                                    toast.info('Cart Empty');
-                                    this.props.history.push('/')
-                                }
-                            })
-                        }}
-                               className="btn btn-success btn-block" value="CHECKOUT"/>
-                    </div>
-                    <div className="col-4">
-                        <h3>Total Harga = {this.renderTotalCart()}</h3>
-                    </div>
-                </div>
-                {this.state.isCheckout
-                    ?
-                    <div className="row mt-4">
-                        <div className="col-10">
+                {
+                    this.state.empty ?
+                        <div className="alert alert-danger" role="alert">
+                            Your Cart is Empty, Let's <Link to={'/'} style={{color: "green"}}> Go Shopping </Link>
+                        </div>
+                        :
+                        <div>
+                            <table className="table mt-3 text-center">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total Price</th>
+                                    <th>Delete</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {this.renderCart()}
+                                </tbody>
+                            </table>
                             <div className="row">
-                                <div className="col-6">
-                                    <input type="text" onChange={(e) => {
-                                        this.setState({inputPenerima: e.target.value})
-                                    }} className="form-control" placeholder="Nama Penerima"/>
-                                </div>
-                                <div className="col-6">
-                                    <input type="button" value="PAY" onClick={this.onBtnPay}
-                                           className="btn btn-primary btn-block"/>
-                                </div>
-                            </div>
-                            <div className="row mt-3">
                                 <div className="col-8">
-                                    <input type="text" onChange={(e) => {
-                                        this.setState({inputAlamat: e.target.value})
-                                    }} className="form-control" placeholder="Alamat"/>
+                                    <input type="button" onClick={() => {
+                                        axios.get(urlApi + `cart?userId=${this.props.id}`).then(res => {
+                                            if (res.data.length) {
+                                                this.setState({isCheckout: !this.state.isCheckout})
+                                            } else {
+                                                toast.info('Cart Empty');
+                                                this.props.history.push('/')
+                                            }
+                                        })
+                                    }}
+                                           className="btn btn-success btn-block" value="CHECKOUT"/>
                                 </div>
                                 <div className="col-4">
-                                    <input type="text" onChange={(e) => {
-                                        this.setState({inputKodePos: e.target.value})
-                                    }} className="form-control" placeholder="Kode Pos"/>
+                                    <h3>Total Harga = Rp. {numberWithCommas(this.renderTotalCart())}</h3>
                                 </div>
                             </div>
-                            <div className="row mt-3">
-                                <div className="col-12">
-                                    <input type="number" onChange={(e) => {
-                                        this.setState({inputUang: e.target.value})
-                                    }} className="form-control" placeholder="Uang situ"/>
+                            {this.state.isCheckout
+                                ?
+                                <div className="row mt-4">
+                                    <div className="col-10">
+                                        <div className="row">
+                                            <div className="col-6">
+                                                <input type="text" onChange={(e) => {
+                                                    this.setState({inputPenerima: e.target.value})
+                                                }} className="form-control" placeholder="Nama Penerima"/>
+                                            </div>
+                                            <div className="col-6">
+                                                <input type="button" value="PAY" onClick={this.onBtnPay}
+                                                       className="btn btn-primary btn-block"/>
+                                            </div>
+                                        </div>
+                                        <div className="row mt-3">
+                                            <div className="col-8">
+                                                <input type="text" onChange={(e) => {
+                                                    this.setState({inputAlamat: e.target.value})
+                                                }} className="form-control" placeholder="Alamat"/>
+                                            </div>
+                                            <div className="col-4">
+                                                <input type="text" onChange={(e) => {
+                                                    this.setState({inputKodePos: e.target.value})
+                                                }} className="form-control" placeholder="Kode Pos"/>
+                                            </div>
+                                        </div>
+                                        <div className="row mt-3">
+                                            <div className="col-12">
+                                                <input type="number" onChange={(e) => {
+                                                    this.setState({inputUang: e.target.value})
+                                                }} className="form-control" placeholder="Uang situ"/>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                :
+                                null}
                         </div>
-                    </div>
-                    :
-                    null}
+                }
             </div>
         );
     }
@@ -246,4 +280,4 @@ const mapStateToProps = state => {
     }
 };
 
-export default connect(mapStateToProps)(Cart)
+export default connect(mapStateToProps,{setCart})(Cart)

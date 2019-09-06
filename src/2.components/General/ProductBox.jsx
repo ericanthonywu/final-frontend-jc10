@@ -5,6 +5,7 @@ import axios from 'axios'
 import {urlApi} from "../../3.helpers/database";
 import {connect} from 'react-redux'
 import {toast, ToastContainer} from "react-toastify";
+import {setCart} from "../../redux/1.actions";
 
 class ProductBox extends React.Component {
     constructor(props) {
@@ -13,9 +14,9 @@ class ProductBox extends React.Component {
     }
 
     addToCart = e => {
-        axios.get(urlApi+`cart?productId=${this.props.id}&userId=${this.props.userId}`).then(res => {
-            if(res.data.length) {
-                axios.put(urlApi+`cart/${res.data[0].id}`,{
+        axios.get(urlApi + `cart?productId=${this.props.id}&userId=${this.props.userId}`).then(res => {
+            if (res.data.length) {
+                axios.put(urlApi + `cart/${res.data[0].id}`, {
                     productId: this.props.id,
                     userId: this.props.userId,
                     price: this.props.harga,
@@ -24,9 +25,14 @@ class ProductBox extends React.Component {
                     productName: this.props.nama,
                     quantity: res.data[0].quantity + 1
                 }).then(() => {
+                    axios.get(`${urlApi}cart?userId=${this.props.userId}`).then(res => {
+                        this.props.setCart({
+                            totalCart: res.data.length
+                        })
+                    })
                     toast.success(`Products ${this.props.nama} Successfully added!`)
                 })
-            }else{
+            } else {
                 axios.post(urlApi + "cart", {
                     productId: this.props.id,
                     userId: this.props.userId,
@@ -36,6 +42,11 @@ class ProductBox extends React.Component {
                     discount: this.props.discount,
                     productName: this.props.nama,
                 }).then(() => {
+                    axios.get(`${urlApi}cart?userId=${this.props.userId}`).then(res => {
+                        this.props.setCart({
+                            totalCart: res.data.length
+                        })
+                    })
                     toast.success(`Products ${this.props.nama} Successfully added!`)
                 })
             }
@@ -85,4 +96,4 @@ const mapToStateProps = state => {
     }
 };
 
-export default connect(mapToStateProps)(ProductBox);
+export default connect(mapToStateProps,{setCart})(ProductBox);

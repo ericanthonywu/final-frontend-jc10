@@ -162,212 +162,88 @@
       "img": "d"
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "productId": 3,
+      "userId": 1,
+      "quantity": 1,
+      "price": 30000,
+      "img": "https://ecs7.tokopedia.net/img/product-1/2018/7/27/27345219/27345219_c9909d3f-8e63-4581-a242-63995611577d_1000_1000.jpg",
+      "discount": 20,
+      "productName": "Epic Comeback",
+      "id": 1
+    }
+  ],
   "history": [
     {
       "userId": 29,
       "items": [
         {
-          "productId": 2,
-          "userId": 29,
-          "price": 40000,
-          "img": "https://store.primagraphia.co.id/wp-content/uploads/2014/08/konsep-kaos.jpg",
-          "discount": 0,
-          "productName": "The Gelap Kesatria",
-          "quantity": 2,
-          "id": 1
-        },
-        {
           "productId": 1,
           "userId": 29,
-          "quantity": 2,
           "price": "20000",
           "img": "https://www.jakartanotebook.com/images/products/99/63/19075/2/kaos-polos-katun-pria-o-neck-size-m-81402b-or-t-shirt-black-24.jpg",
           "discount": "15",
           "productName": "Kaos Polos Hitam",
-          "id": 2
+          "quantity": 2,
+          "id": 1
         },
         {
           "productId": 3,
           "userId": 29,
-          "quantity": 4,
+          "quantity": 1,
           "price": 30000,
           "img": "https://ecs7.tokopedia.net/img/product-1/2018/7/27/27345219/27345219_c9909d3f-8e63-4581-a242-63995611577d_1000_1000.jpg",
           "discount": 20,
           "productName": "Epic Comeback",
-          "id": 3
+          "id": 2
         }
       ],
-      "time": "2019-09-05",
-      "totalPrice": "Rp. 210,000",
+      "time": "2019-09-06",
+      "totalPrice": 58000,
       "recipient": "asd",
-      "postalCode": "12",
-      "address": "asd",
+      "postalCode": "123",
+      "address": "as",
       "id": 1
     },
     {
       "userId": 29,
       "items": [
         {
-          "productId": 2,
-          "userId": 29,
-          "price": 40000,
-          "img": "https://store.primagraphia.co.id/wp-content/uploads/2014/08/konsep-kaos.jpg",
-          "discount": 0,
-          "productName": "The Gelap Kesatria",
-          "quantity": 2,
-          "id": 1
-        },
-        {
           "productId": 1,
           "userId": 29,
-          "quantity": 2,
+          "quantity": 1,
           "price": "20000",
           "img": "https://www.jakartanotebook.com/images/products/99/63/19075/2/kaos-polos-katun-pria-o-neck-size-m-81402b-or-t-shirt-black-24.jpg",
           "discount": "15",
           "productName": "Kaos Polos Hitam",
-          "id": 2
+          "id": 1
         },
-        {
-          "productId": 3,
-          "userId": 29,
-          "quantity": 4,
-          "price": 30000,
-          "img": "https://ecs7.tokopedia.net/img/product-1/2018/7/27/27345219/27345219_c9909d3f-8e63-4581-a242-63995611577d_1000_1000.jpg",
-          "discount": 20,
-          "productName": "Epic Comeback",
-          "id": 3
-        }
-      ],
-      "time": "2019-09-05",
-      "totalPrice": "Rp. 210,000",
-      "recipient": "asd",
-      "postalCode": "12",
-      "address": "12",
-      "id": 2
-    },
-    {
-      "userId": 29,
-      "items": [
         {
           "productId": 2,
           "userId": 29,
+          "quantity": 1,
           "price": 40000,
           "img": "https://store.primagraphia.co.id/wp-content/uploads/2014/08/konsep-kaos.jpg",
           "discount": 0,
           "productName": "The Gelap Kesatria",
-          "quantity": 2,
-          "id": 1
-        },
-        {
-          "productId": 1,
-          "userId": 29,
-          "quantity": 2,
-          "price": "20000",
-          "img": "https://www.jakartanotebook.com/images/products/99/63/19075/2/kaos-polos-katun-pria-o-neck-size-m-81402b-or-t-shirt-black-24.jpg",
-          "discount": "15",
-          "productName": "Kaos Polos Hitam",
           "id": 2
-        },
-        {
-          "productId": 3,
-          "userId": 29,
-          "quantity": 4,
-          "price": 30000,
-          "img": "https://ecs7.tokopedia.net/img/product-1/2018/7/27/27345219/27345219_c9909d3f-8e63-4581-a242-63995611577d_1000_1000.jpg",
-          "discount": 20,
-          "productName": "Epic Comeback",
-          "id": 3
         }
       ],
-      "time": "2019-09-05",
-      "totalPrice": "Rp. 210,000",
-      "recipient": "asd",
-      "postalCode": "121",
-      "address": "asd",
-      "id": 3
-    },
-    {
-      "userId": 29,
-      "items": [
-        {
-          "productId": 2,
-          "userId": 29,
-          "price": 40000,
-          "img": "https://store.primagraphia.co.id/wp-content/uploads/2014/08/konsep-kaos.jpg",
-          "discount": 0,
-          "productName": "The Gelap Kesatria",
-          "quantity": 2,
-          "id": 1
-        },
-        {
-          "productId": 1,
-          "userId": 29,
-          "quantity": 2,
-          "price": "20000",
-          "img": "https://www.jakartanotebook.com/images/products/99/63/19075/2/kaos-polos-katun-pria-o-neck-size-m-81402b-or-t-shirt-black-24.jpg",
-          "discount": "15",
-          "productName": "Kaos Polos Hitam",
-          "id": 2
-        },
-        {
-          "productId": 3,
-          "userId": 29,
-          "quantity": 4,
-          "price": 30000,
-          "img": "https://ecs7.tokopedia.net/img/product-1/2018/7/27/27345219/27345219_c9909d3f-8e63-4581-a242-63995611577d_1000_1000.jpg",
-          "discount": 20,
-          "productName": "Epic Comeback",
-          "id": 3
-        }
-      ],
-      "time": "2019-09-05",
-      "totalPrice": "Rp. 210,000",
+      "time": "2019-09-06",
+      "totalPrice": 57000,
       "recipient": "asd",
       "postalCode": "123",
-      "address": "sd",
-      "id": 4
-    },
+      "address": "1231232",
+      "id": 2
+    }
+  ],
+  "wishlist": [
     {
-      "userId": 29,
-      "items": [
-        {
-          "productId": 2,
-          "userId": 29,
-          "price": 40000,
-          "img": "https://store.primagraphia.co.id/wp-content/uploads/2014/08/konsep-kaos.jpg",
-          "discount": 0,
-          "productName": "The Gelap Kesatria",
-          "quantity": 2,
-          "id": 1
-        },
-        {
-          "productId": 1,
-          "userId": 29,
-          "quantity": 2,
-          "price": "20000",
-          "img": "https://www.jakartanotebook.com/images/products/99/63/19075/2/kaos-polos-katun-pria-o-neck-size-m-81402b-or-t-shirt-black-24.jpg",
-          "discount": "15",
-          "productName": "Kaos Polos Hitam",
-          "id": 2
-        },
-        {
-          "productId": 3,
-          "userId": 29,
-          "quantity": 4,
-          "price": 30000,
-          "img": "https://ecs7.tokopedia.net/img/product-1/2018/7/27/27345219/27345219_c9909d3f-8e63-4581-a242-63995611577d_1000_1000.jpg",
-          "discount": 20,
-          "productName": "Epic Comeback",
-          "id": 3
-        }
-      ],
-      "time": "2019-09-05",
-      "totalPrice": "Rp. 210,000",
-      "recipient": "asd",
-      "postalCode": "1211",
-      "address": "jancok",
-      "id": 5
+      "userId": 1,
+      "productsId": 1,
+      "productName": "Kaos Polos Hitam",
+      "id": 1
     }
   ]
 }
